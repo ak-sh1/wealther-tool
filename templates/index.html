@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Lookup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="sky">
+        <div class="card">
+            <p class="eyebrow">Weather Lookup</p>
+            <h1>Where's the sky today?</h1>
+
+            <form method="get" class="search-row">
+                <input
+                    type="text"
+                    name="city"
+                    placeholder="Try “Toronto”"
+                    value="{{ city }}"
+                    autofocus
+                >
+                <button type="submit">Search</button>
+            </form>
+
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
+
+            {% if report %}
+                <div class="result">
+                    <p class="place">{{ report.name }}</p>
+                    <p class="temp">{{ report.temperature_c }}°<span class="unit">C</span></p>
+                    <p class="condition">{{ report.condition }}</p>
+                    <p class="wind">Wind {{ report.windspeed_kmh }} km/h</p>
+                </div>
+            {% endif %}
+        </div>
+    </main>
+</body>
+</html>
